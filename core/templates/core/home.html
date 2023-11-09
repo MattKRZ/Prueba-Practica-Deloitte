@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="hero-section">
+    <h1>Bienvenido a Deloitte</h1>
+    <p>Let's make this work</p>
+    <a href="{% url 'productos' %}" class="btn btn-primary">Ver Productos</a>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="feature-box h-100 d-flex flex-column">
+                <h2>Innovación</h2>
+                <p>
+                    La innovación es nuestra clave del éxito y está presente en todo lo que hacemos, desde mejorar los servicios y capacidades que ofrecemos a nuestros clientes, hasta optimizar nuestros propios procesos internos.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-box h-100 d-flex flex-column">
+                <h2>Cultura de liderazgo</h2>
+                <p>En Deloitte atraemos y retenemos líderes en todos los niveles de la organización. Estamos orgullosos de ser reconocidos por varios premios como por ser una de las mejores empresas para trabajar en Chile.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-box h-100 d-flex flex-column">
+                <h2>Contáctanos</h2>
+                <p>Santiago Rosario Norte 407, Las Condes, Santiago, Chile, <a href="tel:+56227297000">+56 22729 7000</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+<main class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-4 col-md-6">
+            <form id="createCategory" method="POST" action="{% url 'crearCategoria' %}" class="card card-body">
+                <h2 class="text-center mb-4">Crear Categoría</h2>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Nombre categoría:</label>
+                    <input type="text" name="categoria" id="categoria" class="form-control" placeholder="Escribe el nombre de la categoría" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Crear</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

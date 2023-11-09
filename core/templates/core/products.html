@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row align-items-center my-4">
+        <div class="col-md-4">
+            <form action="{% url 'productos' %}" method="GET" id="filtroForm">
+                {% csrf_token %}
+                <select class="form-select" name="Categoria" id="categoriaSelect">
+                    <option value="" {% if not filtrar_categoria %} selected {% endif %}>Categorías</option>
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.category }}" {% if filtrar_categoria == categoria.category %} selected {% endif %}>
+                            {{ categoria.category }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for producto in productos %}
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="{{ producto.image_url }}" class="card-img-top" alt="{{ producto.product_name }}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ producto.product_name }}</h5>
+                        <p class="card-text">{{ producto.description }}</p>
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            {% if not user.is_authenticated %}
+                                <div class="fw-bold">${{ producto.price }}</div>
+                            {% endif %}
+                            {% if not user.is_superuser %}
+                                <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i></button>
+                            {% endif %}
+                        </div>
+                        <div class="mt-auto d-flex justify-content-end">
+                            {% if user.is_authenticated and user.is_superuser %}
+                                <form action="{% url 'modificarProducto' producto.id %}" method="POST" class="mx-1">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </form>
+                                <form action="{% url 'eliminarProducto' producto.id %}" method="POST" class="mx-1">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form> 
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <h3>No existen productos de esa categoría</h3>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.getElementById('categoriaSelect').addEventListener('change', function() {
+        document.getElementById('filtroForm').submit();
+    });
+</script>
+
+{% endblock %}

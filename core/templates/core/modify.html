@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-6 col-md-8">
+            <form id="modify" method="POST" action="{% url 'modificacionProducto' %}" class="card card-body">
+                <h2 class="text-center mb-4">Modificar Producto</h2>
+                {% csrf_token %}
+
+                <input type="hidden" name="id" value="{{producto.id}}">
+
+                <div class="mb-3">
+                    <label for="producto" class="form-label">Nombre producto:</label>
+                    <input type="text" name="producto" id="producto" class="form-control" required value="{{producto.product_name}}">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción producto:</label>
+                    <input type="text" name="description" id="description" class="form-control" required value="{{producto.description}}">
+                </div>
+                <div class="mb-3">
+                    <label for="img_url" class="form-label">Imagen:</label>
+                    <input type="text" name="img_url" id="img_url" class="form-control" required value="{{producto.image_url}}">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Precio:</label>
+                    <input type="text" name="price" id="price" class="form-control" required value="{{producto.price}}">
+                </div>
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoría:</label>
+                    <select name="categoria" id="categoria" class="form-select" required>
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}"
+                                {% if categoria.id == producto.category.id %}
+                                    selected
+                                {% endif %}>
+                                {{ categoria.category }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-warning w-100">Modificar</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
