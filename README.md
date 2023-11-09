@@ -28,4 +28,4 @@ Para acceder con cuenta de administrador se debe generar con el comando "python3
 Frontend: HTML5, CSS3 (Bootstrap) y JS.
 Backend: Python (Django) y PostgreSQL.
 
-Aplicación desarrolada por Matia Zambelli Corral, contacto: matia.zambelli@sansano.usm.cl
+Aplicación desarrollada por Matia Zambelli, contacto: matia.zambelli@sansano.usm.cl
